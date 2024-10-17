@@ -11,13 +11,13 @@ module "lambda_vector" {
 
   # Lambda configuration
   package_type   = "Image"
-  image_uri      = data.aws_ssm_parameter.uri.value
+  image_uri      = "${data.aws_ssm_parameter.uri.value}:latest"
   architectures = ["x86_64"]
   create_package = false
 
   runtime       = var.runtime
   function_name = "${local.app_preffix}-lambda"
-  description   = coalesce(null, "")
+  description   = coalesce(var.description, "")
   handler       = var.handler
 
   timeout = var.timeout

@@ -17,39 +17,41 @@ variable "environment" {
 }
 variable "extra_tags" {
   description = "Tags"
-  type        = map(string)
+  type = map(string)
   default = {}
 }
-variable "ecr_repo_name" {
-  description = "Repository name"
-}
+
 variable "runtime" {
   description = ""
-  type = string
-  default = "python3.12"
+  type        = string
+  default     = "python3.12"
 }
 variable "description" {
   description = ""
-  type = string
-  default = ""
+  type        = string
+  default     = "Pending descr"
 }
 variable "handler" {
   description = ""
-  type = string
-  default = "index.handler"
+  type        = string
+  default     = "index.handler"
 }
 variable "timeout" {
   description = ""
-  type = number
-  default = 30
+  type        = number
+  default     = 30
 }
 variable "memory_size" {
   description = ""
-  type = number
-  default = 128
+  type        = number
+  default     = 128
 }
 variable "environment_variables" {
   description = ""
   type = map(string)
-  default = {  }
+  default = {}
+}
+variable "lambda_image_uri_ssm" {
+  description = ""
+  type        = string
 }
