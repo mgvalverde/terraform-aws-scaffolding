@@ -64,16 +64,15 @@ In this example we:
 4. Create and deploy an `app` stack with ECR repositories
 
 ### Set up an environment
-1. Create a .env file, even if it's not needed. The `Makefile` needs it.
+ 1. Create a .env file, even if it's not needed. The `Makefile` needs it.
 
 ```bash
 mv template.env .env
 ```
- 
 
 ### Create and deploy a `setup` stack with ECR repositories
 
-3. Create the files `backend.conf` and `terraform.tfvars` for the right app and environemnt.
+ 2. Create the files `backend.conf` and `terraform.tfvars` for the right app and environment.
 In `environments/sandbox/app` you have templates for those.
 
 An example for `sandbox/app`: 
@@ -81,16 +80,32 @@ An example for `sandbox/app`:
 cp environments/sandbox/app/template.backend.conf environments/sandbox/setup/backend.conf
 cp environments/sandbox/app/template.terraform.tfvars environments/sandbox/setup/terraform.tfvars
 ```
+Add the missing values in the files. 
+
+```bash
+make tf/init TARGET=setup ENV=sandbox 
+```
+
+```bash
+make tf/apply TARGET=setup ENV=sandbox 
+```
 
 ### Build and push a docker image for lambda
 
 ```bash
-make docker/build && make docker/push
+make docker/build TARGET=setup && make docker/push TARGET=setup
 ```
 
 ### Create and deploy an `app` stack with ECR repositories
 
-TODO: ... 
+```bash
+make tf/init TARGET=app ENV=sandbox 
+```
+
+```bash
+make tf/apply TARGET=app ENV=sandbox 
+```
+
 
 ## Makefile utils
 
@@ -238,4 +253,4 @@ Helper to deploy using terraform
 
 ## TODO:
 
-[] Add pre-commit
+ [] Add pre-commit
