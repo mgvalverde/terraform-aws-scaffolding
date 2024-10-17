@@ -10,14 +10,14 @@ module "lambda_vector" {
   publish = true
 
   # Lambda configuration
-  package_type  = "Image"
+  package_type   = "Image"
   image_uri      = data.aws_ssm_parameter.uri.value
   architectures = ["x86_64"]
   create_package = false
 
   runtime       = var.runtime
   function_name = "${local.app_preffix}-lambda"
-  description   = coalesce(null,"")
+  description   = coalesce(null, "")
   handler       = var.handler
 
   timeout = var.timeout

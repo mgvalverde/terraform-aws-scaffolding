@@ -26,7 +26,7 @@ variable "ecr_repo_name" {
 variable "runtime" {
   description = ""
   type = string
-  default = ""
+  default = "python3.12"
 }
 variable "description" {
   description = ""
