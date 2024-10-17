@@ -21,7 +21,7 @@ AWS_REGION=$(shell aws configure get region)
 EVENT_FILE ?= "test_event.json"
 LAMBDA_ENV ?= "./lambda.env"
 
-.PHONY :  aws/ docker/ tf/ misc/
+.PHONY :  aws/ docker/ tf/
 
 # LOGIN
 aws/login :
@@ -70,25 +70,25 @@ lambda/test/event:
 ## TERRAFORM COMMANDS: TARGET / INIT
 # TARGET=deployment app
 tf/init:
-	terraform -chdir=./deployments/$(TARGET) init -backend-config=./environments/$(ENV)/$(TARGET)/backend.conf
+	terraform -chdir=./deployments/$(TARGET) init -backend-config=../../environments/$(ENV)/$(TARGET)/backend.conf
 
 tf/apply:
-	terraform -chdir=./deployments/$(TARGET) apply -var-file=./environments/$(ENV)/terraform.tfvars -target=module.$(MODULE)
+	terraform -chdir=./deployments/$(TARGET) apply -var-file=../../environments/$(ENV)/$(TARGET)/terraform.tfvars
 
 tf/apply/module:
-	terraform -chdir=./deployments/$(TARGET) apply -var-file=./environments/$(ENV)/terraform.tfvars -target=module.$(MODULE)
+	terraform -chdir=./deployments/$(TARGET) apply -var-file=../../environments/$(ENV)/$(TARGET)/terraform.tfvars -target=module.$(MODULE)
 
 tf/apply/y:
-	terraform -chdir=./deployments/$(TARGET) apply -auto-approve -var-file=./environments/$(ENV)/terraform.tfvars
+	terraform -chdir=./deployments/$(TARGET) apply -auto-approve -var-file=../../environments/$(ENV)/$(TARGET)/terraform.tfvars
 
 tf/destroy:
-	terraform -chdir=./deployments/$(TARGET) destroy -var-file=./environments/$(ENV)/terraform.tfvars
+	terraform -chdir=./deployments/$(TARGET) destroy -var-file=../../environments/$(ENV)/$(TARGET)/terraform.tfvars
 
 tf/destroy/module:
-	terraform -chdir=./deployments/$(TARGET) destroy -var-file=./environments/$(ENV)/terraform.tfvars -target=module.$(MODULE)
+	terraform -chdir=./deployments/$(TARGET) destroy -var-file=../../environments/$(ENV)/$(TARGET)/terraform.tfvars -target=module.$(MODULE)
 
 tf/destroy/y:
-	terraform -chdir=./deployments/$(TARGET) destroy -auto-approve -var-file=./environments/$(ENV)/terraform.tfvars
+	terraform -chdir=./deployments/$(TARGET) destroy -auto-approve -var-file=../../environments/$(ENV)/$(TARGET)/terraform.tfvars
 
 tf/plan:
-	terraform -chdir=./deployments/$(TARGET) plan -var-file=./environments/$(ENV)/terraform.tfvars
+	terraform -chdir=./deployments/$(TARGET) plan -var-file=../../environments/$(ENV)/$(TARGET)/terraform.tfvars
