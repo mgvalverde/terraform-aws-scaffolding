@@ -47,3 +47,5 @@ terragrunt-debug.tfvars.json
 
 **/.venv/*
 **/.idea/*
+.env
+.terraform.lock.hcl
